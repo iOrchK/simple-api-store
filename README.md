@@ -1,57 +1,48 @@
 # simple-api-store
 
-
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
-
-
-## Description
+## Descripción
 
 Una simple API desarrollada con NestJS que contiene un CRUD de productos
 
-## Installation
+## Instalación
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+## Ejecutar la app
 
 ```bash
-# development
+# desarrollo
 $ npm run start
 
-# watch mode
+# modo observador
 $ npm run start:dev
 
-# production mode
+# compilación para producción
 $ npm run start:prod
 ```
 
-## Test
+## Pruebas
 
 ```bash
-# unit tests
+# pruebas unitarias
 $ npm run test
 
-# e2e tests
+# pruenas e2e
 $ npm run test:e2e
 
-# test coverage
+# cobertura de prueba
 $ npm run test:cov
 ```
 
-## Support
+## Endpoints
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-  Nest is [MIT licensed](LICENSE).
+```bash
+# desarrollo
+Lista de productos     -> GET    -> https://localhost:3001/products
+Buscar producto por id -> GET    -> https://localhost:3001/products/:id
+Crear producto         -> POST   -> https://localhost:3001/products
+Actualizar producto    -> PUT    -> https://localhost:3001/products/:id
+Eliminar producto      -> DELETE -> https://localhost:3001/products/:id
+```
