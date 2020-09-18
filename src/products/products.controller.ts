@@ -9,16 +9,36 @@ import {
   HttpStatus,
   Param,
 } from '@nestjs/common';
-import { CreateProductDto } from './dto/create-product-dto';
+import { CreateProductDto } from './dto/create-product.dto';
 import { ProductsService } from './products.service';
 import { v4 as uuid } from 'uuid';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiParam,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
+import { Product } from './classes/product.class';
+import { Response } from 'express';
 
+@ApiBearerAuth()
+@ApiTags('products')
 @Controller('products')
 export class ProductsController {
   constructor(private service: ProductsService) {}
 
   @Get(':id')
-  findById(@Res() response, @Param('id') itemId) {
+  @ApiOperation({ summary: 'Get product by id' })
+  @ApiResponse({
+    status: 200,
+    description: 'The found record',
+    type: Product,
+  })
+  @ApiResponse({ status: 500, description: 'Internal Server Error' })
+  @ApiParam({ name: 'id' })
+  findById(@Res() response: Response, @Param('id') itemId: string) {
     this.service
       .findById(itemId)
       .then(result => {
@@ -34,7 +54,14 @@ export class ProductsController {
   }
 
   @Get()
-  findAll(@Res() response) {
+  @ApiOperation({ summary: 'Get all products' })
+  @ApiResponse({
+    status: 200,
+    description: 'The found records',
+    type: [Product],
+  })
+  @ApiResponse({ status: 500, description: 'Internal Server Error' })
+  findAll(@Res() response: Response) {
     this.service
       .findAll()
       .then(result => {
@@ -50,7 +77,14 @@ export class ProductsController {
   }
 
   @Post()
-  create(@Body() item: CreateProductDto, @Res() response) {
+  @ApiOperation({ summary: 'Create product' })
+  @ApiResponse({
+    status: 201,
+    description: 'The created record',
+    type: Product,
+  })
+  @ApiResponse({ status: 500, description: 'Internal Server Error' })
+  create(@Body() item: CreateProductDto, @Res() response: Response) {
     item.IdProduct = uuid();
     item.TimeStamp = Math.floor(new Date().getTime() / 1000);
     this.service
@@ -69,7 +103,19 @@ export class ProductsController {
   }
 
   @Put(':id')
-  update(@Body() item: CreateProductDto, @Res() response, @Param('id') itemId) {
+  @ApiOperation({ summary: 'Update product by id' })
+  @ApiResponse({
+    status: 200,
+    description: 'The updated record',
+    type: Product,
+  })
+  @ApiResponse({ status: 500, description: 'Internal Server Error' })
+  @ApiParam({ name: 'id' })
+  update(
+    @Body() item: CreateProductDto,
+    @Res() response: Response,
+    @Param('id') itemId: string,
+  ) {
     this.service
       .update(itemId, item)
       .then(result => {
@@ -85,7 +131,15 @@ export class ProductsController {
   }
 
   @Delete(':id')
-  delete(@Res() response, @Param('id') itemId) {
+  @ApiOperation({ summary: 'Delete product by id' })
+  @ApiResponse({
+    status: 201,
+    description: 'The deleted record',
+    type: Product,
+  })
+  @ApiResponse({ status: 500, description: 'Internal Server Error' })
+  @ApiQuery({ name: 'id' })
+  delete(@Res() response: Response, @Param('id') itemId: string) {
     this.service
       .delete(itemId)
       .then(result => {
