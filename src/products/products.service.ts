@@ -1,8 +1,8 @@
 import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { CreateProductDto } from './dto/create-product-dto';
-import { Product } from './schemas/products.schema';
+import { CreateProductDto } from './dto/create-product.dto';
+import { Product } from './schemas/product.schema';
 
 @Injectable()
 export class ProductsService {
@@ -10,7 +10,7 @@ export class ProductsService {
     @InjectModel('Products_JorgeChable') private readonly model: Model<Product>,
   ) {}
 
-  async findById(itemId: number): Promise<Product> {
+  async findById(itemId: string): Promise<Product> {
     return await this.model.findById(itemId).exec();
   }
 
@@ -23,12 +23,12 @@ export class ProductsService {
     return await newItem.save();
   }
 
-  async update(itemId: number, item: CreateProductDto): Promise<Product> {
+  async update(itemId: string, item: CreateProductDto): Promise<Product> {
     // return await this.model.updateOne({ IdProduct: itemId }, { $set: item });
     return await this.model.updateOne({ _id: itemId }, { $set: item });
   }
 
-  async delete(itemId: number): Promise<any> {
+  async delete(itemId: string): Promise<any> {
     // return await this.model.deleteOne({ IdProduct: itemId });
     return await this.model.deleteOne({ _id: itemId });
   }
