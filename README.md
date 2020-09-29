@@ -4,6 +4,16 @@
 
 Una simple API desarrollada con NestJS que contiene un CRUD de productos
 
+## Dependencias
+
+```bash
+@nestjs/config     -> https://docs.nestjs.com/techniques/configuration
+@nestjs/mongoose   -> https://docs.nestjs.com/techniques/mongodb
+env-cmd            -> https://www.npmjs.com/package/env-cmd
+swagger-ui-express -> https://docs.nestjs.com/openapi/introduction
+uuid               -> https://www.npmjs.com/package/uuid
+```
+
 ## Instalación
 
 ```bash
